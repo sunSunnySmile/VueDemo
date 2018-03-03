@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>1自定义指令.html</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <component :is="componentName"></component>
+        <button @click="changContent('app-shuo')">小说</button>
+        <button @click="changContent('app-tu')">图片</button>
+        <button @click="changContent('app-yue')">音乐</button>
+
+    </div>
+</body>
+<script>
+    Vue.component("app-shuo", {
+        template: `<p>我是好看的小说</p>`,
+        data: function() {
+            return {
+
+            }
+        }
+    })
+    Vue.component("app-tu", {
+        template: `<p>我是好看的美图</p>`
+    })
+    Vue.component("app-yue", {
+        template: `<p>我是歌曲</p>`
+    })
+    new Vue({
+        el: "#app",
+        methods: {
+            changContent: function(name) {
+                this.componentName = name
+            }
+        },
+        data: {
+            componentName: "app-shuo"
+        }
+    })
+</script>
+
+</html>

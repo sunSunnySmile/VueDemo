@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>2自定义高亮显示指令.html</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- <p v-pang:strong="keyword">{{msg}}</p> -->
+        <p v-html="msg" v-pang="keyword"></p>
+    </div>
+</body>
+<script>
+    // 指令就是对DOM操作的封装，目的是为了复用
+    Vue.directive("pang", function(node, obj) {
+        // vue会自动传参node和obj
+        // node是调用指令的Dom节点
+        // Obj是是一个对象，obj的value属性可以获取指令的数据值
+        var content = node.textContent;
+        var val = obj.value;
+        var reg = new RegExp(val, "g");
+        node.innerHTML = content.replace(reg, " <strong style='color:red'>" + val + "</strong>")
+
+    })
+    new Vue({
+        el: "#app",
+        data: {
+            msg: "春天来了，花儿都开了，花是红色的",
+            keyword: "花"
+
+        }
+    })
+</script>
+
+</html>
