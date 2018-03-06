@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>给组件传递数据.html</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <app-main></app-main>
+    </div>
+</body>
+<script>
+    Vue.component("app-main", {
+        template: ` <main>中间部分
+                <app-left></app-left>
+                <app-right></app-right>
+        </main> `,
+    })
+    Vue.component("app-left", {
+        template: ` <div>左半胳膊部分
+        </div> `,
+    })
+    Vue.component("app-right", {
+        template: ` <div>右半部分胳膊
+        <app-son></app-son>            
+        </div> `,
+    })
+    Vue.component("app-son", {
+        template: ` <div>嵌套组件就是组件之间的嵌套，所谓父子组件就是看谁是外层组件
+        </div> `,
+    })
+
+    new Vue({
+        el: "#app",
+        data: {
+
+        }
+    })
+</script>
+
+</html>

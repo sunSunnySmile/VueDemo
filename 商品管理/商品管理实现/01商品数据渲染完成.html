@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            width: 800px;
+            margin: 20px auto;
+        }
+        
+        .operation {
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 18px;
+        }
+        
+        .operation input {
+            padding: 5px;
+            border: 1px solid deepskyblue;
+        }
+        
+        .operation button {
+            border-radius: 3px;
+            background-color: deepskyblue;
+        }
+        
+        .search {
+            text-align: left;
+            line-height: 20px;
+            font-size: 18px;
+        }
+        
+        .search input {
+            padding: 5px;
+            border: 1px solid deeppink;
+        }
+        
+        #tb {
+            width: 800px;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        
+        #tb th {
+            background-color: #0094ff;
+            color: white;
+            font-size: 16px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+        
+        #tb td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!--<div class="operation">
+			<input type="text" placeholder="请输入编号">
+			<input type="text" placeholder="请输入名称">
+			<button type="button">添加数据</button>
+		</div>
+		<div class="search">
+			<input type="text" placeHolder="请输入筛选内容">
+		</div>-->
+        <table id="tb">
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="list.length==0">
+                <td colspan="4">列表无数据</td>
+            </tr>
+            <tr v-for="item in list">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.addTime|dateFilter}}</td>
+                <td>无</td>
+                <!--<td>
+					<a href="#">删除</a>
+				</td>-->
+            </tr>
+
+        </table>
+    </div>
+</body>
+<script>
+    Vue.filter('dateFilter', function() {
+            var date = new Date();
+            return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
+        }
+
+    )
+    new Vue({
+        el: ".wrapper",
+        data: {
+            list: [{
+                    id: 1,
+                    name: '面膜',
+                    addTime: new Date(2013)
+                }, {
+                    id: 2,
+                    name: '隔离',
+                    addTime: new Date(2009)
+                }, {
+                    id: 3,
+                    name: '防晒',
+                    addTime: new Date(2010)
+                },
+
+            ]
+        }
+    })
+</script>
+
+</html>

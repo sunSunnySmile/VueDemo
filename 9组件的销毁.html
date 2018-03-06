@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>生命周期函数.html</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p v-text="num"></p>
+        <app-test v-if="isShow"></app-test>
+        <button @click="isShow=!isShow">显示隐藏</button>
+    </div>
+</body>
+<script>
+    Vue.component('app-test', {
+        data: function() {
+            return {
+                timer: null,
+            }
+        },
+        created: function() {
+            this.timer = setInterval(function() {
+                console.log('hi起来');
+            }, 200)
+        },
+        beforeDestroy: function() {
+            console.log('beforeDestroy');
+        },
+        destroyed: function() {
+            console.log('destroyed');
+            clearInterval(this.timer);
+        }
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            num: 0,
+            isShow: true,
+        },
+        beforeCreate: function() {
+            console.log('实例创建前');
+        },
+        created: function() {
+            console.log('实例创建后');
+        },
+        beforeMount: function() {
+            console.log('模板挂载到视图前调用');
+
+        },
+        mounted: function() {
+            console.log('模板挂载到视图后调用');
+        },
+        beforeUpdate: function() {
+            console.log('beforeUpdate');
+        },
+        updated: function() {
+            console.log('updated');
+        },
+        // 组件销毁前与组件销毁后
+        beforeDestroy: function() {
+            console.log('beforeDestroy');
+        },
+        destroyed: function() {
+            console.log('destroyed');
+        }
+    })
+</script>
+
+</html>

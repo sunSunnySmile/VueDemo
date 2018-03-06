@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>给组件传递数据.html</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <app-list :list="list1"></app-list>
+        <app-list :list="list2"></app-list>
+    </div>
+</body>
+<script>
+    Vue.component("app-list", {
+        template: ` <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>`,
+        props: ['list'],
+        data: function() {
+            return {
+
+            }
+        }
+    })
+
+    new Vue({
+        el: "#app",
+        data: {
+            list1: ['SNP', '春雨', 'AHC', 'Ray', 'Junny', '森田药妆'],
+            list2: ['sKII', 'prada', 'channel', 'ESQ', 'whoo'],
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+
+        <component :is="componentId"></component>
+        <button @click="changContent('app-shuo')">小说</button>
+        <button @click="changContent('app-tu')">美图</button>
+    </div>
+</body>
+<script>
+    Vue.component("app-shuo", {
+        template: `<div>
+            <p>我是小说,百度一下吧</p>
+            <img src="https://www.baidu.com/img/bd_logo1.png" alt="">
+        </div>`,
+    })
+    Vue.component("app-tu", {
+        template: `<div>
+            <p>我是美女图</p>
+            <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2031711761,3908848630&fm=27&gp=0.jpg" alt="">
+        </div>`,
+    })
+    new Vue({
+        el: "#app",
+        methods: {
+            changContent: function(name) {
+                this.componentId = name
+            }
+        },
+        data: {
+            componentId: "app-tu"
+        }
+    })
+</script>
+
+</html>
